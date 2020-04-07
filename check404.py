@@ -8,9 +8,9 @@ urllib3.disable_warnings(InsecureRequestWarning)
 check_url = []
 alert_url = []
 low_risk_url = []
-min_low_risk_url = []
+again_low_risk_url = []
 
-myfile = open("check_list.txt")
+myfile = open("sample.txt")
 data = myfile.readlines()
 myfile.close()
 
@@ -50,7 +50,7 @@ for re_res in low_risk_url:
         res_get = requests.get(re_res, timeout=(20, 45), verify=False)
 
     except Exception as e:
-        min_low_risk_url.append(re_res)
+        again_low_risk_url.append(re_res)
         print('URLアクセスエラー(2回目チェック)')
         print(e)
 
@@ -66,8 +66,8 @@ for re_res in low_risk_url:
         print('403発見' + re_res)
         alert_url.append(re_res)
 
-for re_re_res in min_low_risk_url:
-    print('low_risk_urlの3回目チェック')
+for re_re_res in again_low_risk_url:
+    print('again_low_risk_urlの3回目チェック')
     try:
         res_get = requests.get(re_re_res, timeout=(20, 45), verify=False)
 
